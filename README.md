@@ -1,6 +1,6 @@
-# InternetFilter (`v2.2.1`)
+# InternetFilter (`v2.3.0`)
 
-Real-time AI modesty & content filter for Chrome with **5 encrypted on-device models** (`MobileCLIP2-S0 192×192 FastGate`, `MobileCLIP2-S2`, `SigLIP-Base Q8`, `YOLOv11n`, `NudeNet 320n`), **zero-Base64 direct binary fetch**, **WebGPU micro-batching**, **zero-GC tensor pooling**, and **persistent IndexedDB perceptual-hash caching**, plus optional local hardware accelerators.
+Real-time AI modesty & content filter for Chrome with **5 encrypted on-device models** (`MobileCLIP2-S0 128×128 FastGate`, `MobileCLIP2-S2`, `SigLIP-Base Q8`, `YOLOv11n`, `NudeNet 320n`), **zero-Base64 direct binary fetch**, **WebGPU Batch-4 micro-batching**, **zero-GC tensor pooling**, and **persistent IndexedDB perceptual-hash caching**, plus optional local hardware accelerators.
 
 - **Content-Only Filtering**: No page is automatically blocked, and no page bypasses AI image & video screening.
 - **2 Modes in 1 Click**:
@@ -11,7 +11,7 @@ Real-time AI modesty & content filter for Chrome with **5 encrypted on-device mo
 
 ## 1. Install the Chrome Extension (Standalone — No Server Required)
 
-1. Download **`internetfilter-chrome-v2.2.1.zip`** from the [Latest Release (`v2.2.1`)](https://github.com/hershykoh/internetfilter-release/releases/latest).
+1. Download **`internetfilter-chrome-v2.3.0.zip`** from the [Latest Release (`v2.3.0`)](https://github.com/hershykoh/internetfilter-release/releases/latest).
 2. Unzip it to a permanent folder (e.g. `~/Applications/InternetFilter-Extension`).
 3. Open `chrome://extensions` in Google Chrome.
 4. Enable **Developer mode** (top right) → click **Load unpacked** → select the unzipped folder.
