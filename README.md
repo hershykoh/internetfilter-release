@@ -1,17 +1,17 @@
-# InternetFilter (`v2.1.0`)
+# InternetFilter (`v2.2.0`)
 
-Real-time AI modesty & content filter for Chrome with **4 encrypted on-device models** (`MobileCLIP2-S2`, `SigLIP-Base Q8`, `YOLOv11n`, `NudeNet 320n`) and an optional **macOS Apple Silicon Local Accelerator** (`97.4%` Gemini parity across `5,147` real browsing images at `13.6 ms/img`).
+Real-time AI modesty & content filter for Chrome with **5 encrypted on-device models** (`MobileCLIP2-S0 FastGate`, `MobileCLIP2-S2`, `SigLIP-Base Q8`, `YOLOv11n`, `NudeNet 320n`), **WebGPU Batch-4 micro-batching**, **CPU/GPU double-buffering**, and **persistent IndexedDB perceptual-hash caching**, plus optional local hardware accelerators.
 
 - **Content-Only Filtering**: No page is automatically blocked, and no page bypasses AI image & video screening.
 - **2 Modes in 1 Click**:
-  - **⚡ Fast Local**: 100% on-device (`~3.7 ms/img` with M4 Accelerator, `~8–12 ms/img` standalone WebGPU, `0` cloud calls).
-  - **🛡️ Strict Hybrid**: Runs all 4 packed models + optional Gemini verification on borderline cases.
+  - **⚡ Fast Local**: 100% on-device (`~3.7 ms/img` with M4 Accelerator, ultra-fast batched WebGPU standalone, `0` cloud calls).
+  - **🛡️ Strict Hybrid**: Runs all packed models + optional Gemini verification on borderline cases.
 
 ---
 
 ## 1. Install the Chrome Extension (Standalone — No Server Required)
 
-1. Download **`internetfilter-chrome-v2.1.0.zip`** from the [Latest Release (`v2.1.0`)](https://github.com/hershykoh/internetfilter-release/releases/latest).
+1. Download **`internetfilter-chrome-v2.2.0.zip`** from the [Latest Release (`v2.2.0`)](https://github.com/hershykoh/internetfilter-release/releases/latest).
 2. Unzip it to a permanent folder (e.g. `~/Applications/InternetFilter-Extension`).
 3. Open `chrome://extensions` in Google Chrome.
 4. Enable **Developer mode** (top right) → click **Load unpacked** → select the unzipped folder.
