@@ -20,22 +20,25 @@ The extension works immediately **100% standalone inside Chrome** using WebGPU/W
 
 ---
 
-## 2. Optional: Install the Local Apple Silicon Accelerator (3.7 ms/img)
+## 2. Optional: Install the Local Hardware Accelerator (10–15× Faster)
 
-For **3–4× faster** filtering on Apple Silicon Macs (M1/M2/M3/M4) using the Apple Neural Engine + Metal GPU, run:
+The Chrome extension automatically detects `http://127.0.0.1:11436` when running and falls back seamlessly to in-browser WebGPU/WASM when offline.
 
+### macOS (Apple Silicon — Neural Engine + Metal, `13.6 ms/img`)
 ```bash
 curl -fsSL https://raw.githubusercontent.com/hershykoh/internetfilter-release/main/install.sh | bash
 ```
-
-What this installer does:
-- Downloads the pre-compiled Apple Neural Engine & Metal models (`m4-accelerator-v2.1.0.tar.gz`) into `~/.internetfilter-accelerator`.
-- Creates an isolated Python virtual environment inside `~/.internetfilter-accelerator/.venv`.
-- Installs a macOS LaunchAgent (`com.internetfilter.accelerator`) that runs silently on `http://127.0.0.1:11436` and auto-starts on login.
-- The Chrome extension automatically detects `http://127.0.0.1:11436` and switches to Neural Engine acceleration (and falls back seamlessly to in-browser WebGPU if stopped).
-
-### Uninstall Local Accelerator
-
+Uninstall:
 ```bash
 curl -fsSL https://raw.githubusercontent.com/hershykoh/internetfilter-release/main/uninstall.sh | bash
+```
+
+### Windows (Intel / AMD / NVIDIA — DirectML GPU + AVX2/AVX-512, ~45 MB install)
+Open **PowerShell** and run:
+```powershell
+irm https://raw.githubusercontent.com/hershykoh/internetfilter-release/main/install.ps1 | iex
+```
+Uninstall:
+```powershell
+irm https://raw.githubusercontent.com/hershykoh/internetfilter-release/main/uninstall.ps1 | iex
 ```
