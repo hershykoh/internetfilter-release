@@ -2,7 +2,7 @@
 set -euo pipefail
 
 REPO="hershykoh/internetfilter-release"
-VERSION="v2.0.0"
+VERSION="v2.1.0"
 ASSET_NAME="m4-accelerator-${VERSION}.tar.gz"
 DOWNLOAD_URL="https://github.com/${REPO}/releases/download/${VERSION}/${ASSET_NAME}"
 INSTALL_DIR="${HOME}/.internetfilter-accelerator"
