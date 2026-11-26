@@ -1,16 +1,17 @@
 $ErrorActionPreference = "Stop"
 
 $Repo = "hershykoh/internetfilter-release"
-$Version = "v2.1.0"
+$Version = "v2.4.1"
 $AssetName = "windows-accelerator-$Version.zip"
 $DownloadUrl = "https://github.com/$Repo/releases/download/$Version/$AssetName"
 $InstallDir = Join-Path $env:USERPROFILE ".internetfilter-accelerator"
 $Port = if ($env:IFILTER_PORT) { $env:IFILTER_PORT } else { "11436" }
+$Device = if ($env:IFILTER_DEVICE) { $env:IFILTER_DEVICE } else { "auto" }
 $StartupVbs = Join-Path $env:APPDATA "Microsoft\Windows\Start Menu\Programs\Startup\InternetFilterAccelerator.vbs"
 
 Write-Host "============================================================" -ForegroundColor Cyan
-Write-Host "  InternetFilter Windows Accelerator Installer ($Version)" -ForegroundColor Cyan
-Write-Host "  (DirectML GPU / Intel iGPU + Multi-Threaded AVX2/AVX-512)" -ForegroundColor Cyan
+Write-Host "  InternetFilter Safe Windows Accelerator Installer ($Version)" -ForegroundColor Cyan
+Write-Host "  (OpenVINO Intel GPU + GPU SigLIP Gate | Single-Thread Safe)" -ForegroundColor Cyan
 Write-Host "============================================================" -ForegroundColor Cyan
 
 # 1. Locate Python 3.10-3.12 (fallback to any Python 3)
@@ -65,25 +66,25 @@ if (-not (Test-Path $VenvPy)) {
 & $VenvPip install -q -r (Join-Path $InstallDir "requirements.txt")
 
 # 4. Install silent Startup launcher (no console window) and start now
-Write-Host "[4/5] Installing Windows auto-start background service on http://127.0.0.1:$Port..."
+Write-Host "[4/5] Installing Windows auto-start background service on http://127.0.0.1:$Port (device=$Device)..."
 $ServerPy = Join-Path $InstallDir "server.py"
 $RunnerExe = if (Test-Path $VenvPyw) { $VenvPyw } else { $VenvPy }
 $VbsContent = @"
 Set WshShell = CreateObject("WScript.Shell")
 WshShell.CurrentDirectory = "$InstallDir"
-WshShell.Run """$RunnerExe"" ""$ServerPy"" --port $Port", 0, False
+WshShell.Run """$RunnerExe"" -I ""$ServerPy"" --port $Port --device $Device", 0, False
 "@
 Set-Content -Path $StartupVbs -Value $VbsContent -Encoding ASCII
 
-Start-Process -FilePath $RunnerExe -ArgumentList "`"$ServerPy`" --port $Port" -WorkingDirectory $InstallDir -WindowStyle Hidden
+Start-Process -FilePath $RunnerExe -ArgumentList "-I `"$ServerPy`" --port $Port --device $Device" -WorkingDirectory $InstallDir -WindowStyle Hidden
 
-# 5. Verify /health
-Write-Host "[5/5] Waiting for accelerator to warm up..."
-for ($i = 0; $i -lt 50; $i++) {
+# 5. Verify /health (first run compiles & caches OpenVINO GPU kernels into ov_cache/)
+Write-Host "[5/5] Waiting for accelerator to warm up (first launch caches GPU kernels)..."
+for ($i = 0; $i -lt 180; $i++) {
     try {
         $resp = Invoke-RestMethod -Uri "http://127.0.0.1:$Port/health" -TimeoutSec 2
         Write-Host ""
-        Write-Host "OK! InternetFilter Windows Accelerator is running on http://127.0.0.1:$Port" -ForegroundColor Green
+        Write-Host "OK! InternetFilter Safe Windows Accelerator is running on http://127.0.0.1:$Port" -ForegroundColor Green
         Write-Host ($resp | ConvertTo-Json -Compress)
         Write-Host "Your Chrome extension will automatically accelerate with it (zero config needed)." -ForegroundColor Cyan
         exit 0
@@ -92,6 +93,6 @@ for ($i = 0; $i -lt 50; $i++) {
     }
 }
 
-Write-Host "Warning: Accelerator started but /health did not respond within 25s." -ForegroundColor Yellow
+Write-Host "Warning: Accelerator started but /health did not respond within 90s." -ForegroundColor Yellow
 Write-Host "Check logs in: $InstallDir\accelerator.log"
 exit 1

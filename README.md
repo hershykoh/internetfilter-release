@@ -33,11 +33,12 @@ Uninstall:
 curl -fsSL https://raw.githubusercontent.com/hershykoh/internetfilter-release/main/uninstall.sh | bash
 ```
 
-### Windows (Intel / AMD / NVIDIA — DirectML GPU + AVX2/AVX-512, ~45 MB install)
+### Windows (Safe OpenVINO Intel GPU + GPU SigLIP Gate | Single-Thread Below-Normal Priority)
 Open **PowerShell** and run:
 ```powershell
 irm https://raw.githubusercontent.com/hershykoh/internetfilter-release/main/install.ps1 | iex
 ```
+*(Automatically selects OpenVINO GPU on Intel Iris Xe/UHD/Arc with the encrypted GPU SigLIP gate, falling back to DirectML or capped-thread CPU. Single inference thread + bounded queue = zero UI freezes.)*
 Uninstall:
 ```powershell
 irm https://raw.githubusercontent.com/hershykoh/internetfilter-release/main/uninstall.ps1 | iex
