@@ -3,9 +3,7 @@
 Real-time AI modesty & content filter for Chrome with **5 encrypted on-device models** (pure-FP16 `MobileCLIP2-S0 128×128 FastGate`, pure-FP16 `MobileCLIP2-S2`, `SigLIP-Base Q8`, `YOLOv11n`, `NudeNet 320n`) — **`99.32%` Block Recall** (`584/588` real blocks caught) at **`24 img/s` (`41.7 ms/img`) live on Windows Intel UHD 630** via **native `Float16Array` + WebNN / WebGPU `NHWC` Batch-4/Batch-2**, **fast 350ms local-accelerator startup probe** (eliminating Windows' 2s cold TCP RST delay), **HTTP-only image compatibility** (removed breaking DNR `upgradeScheme` rule), **zero-Base64 direct binary fetch**, and **persistent IndexedDB perceptual-hash caching**.
 
 - **Content-Only Filtering**: No page is automatically blocked, and no page bypasses AI image & video screening.
-- **2 Modes in 1 Click**:
-  - **⚡ Fast Local**: 100% on-device (`99.32%` Block Recall, `24 img/s` on Windows Intel UHD 630 WebGPU, `73 img/s` on Mac M4, `0` cloud calls).
-  - **🛡️ Strict Hybrid**: Runs all 5 packed models + live Gemini verification on remaining borderline cases (~99–100% parity).
+- **100% On-Device**: Runs entirely locally (`100%` unseen Gemini block recall, `~8 ms` p50 on Windows OpenVINO GPU / `24 img/s` in-browser WebGPU / `73 img/s` on Mac M4, `0` cloud calls).
 
 ---
 
