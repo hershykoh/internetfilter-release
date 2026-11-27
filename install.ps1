@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 
 $Repo = "hershykoh/internetfilter-release"
-$Version = "v2.4.1"
+$Version = "v2.4.2"
 $AssetName = "windows-accelerator-$Version.zip"
 $DownloadUrl = "https://github.com/$Repo/releases/download/$Version/$AssetName"
 $InstallDir = Join-Path $env:USERPROFILE ".internetfilter-accelerator"
